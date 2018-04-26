@@ -7,13 +7,17 @@ def reduce_whitespaces(text):
     return re.sub(r"[\s\n]+", " ", text)
 
 def remove_punctuations(text):
-    text = re.sub(r"[()-_:;!,]+", "", text)
-    return re.sub(u'[—]+', '', text)
+    text = re.sub(r"[()-_:.;!,*]+", " ", text)
+    return re.sub(u'[—]+', ' ', text)
+
+def remove_illegal_chars(text):
+    return re.sub(r'[*]+', ' ', text)
 
 def process_text(text):
     text = text.lower()
-    text = reduce_whitespaces(text)
     text = remove_punctuations(text)
+    # text = remove_illegal_chars(text)
+    text = reduce_whitespaces(text)
     return text
 
 def remove_urls(text):
@@ -33,7 +37,6 @@ def remove_stopwords(tokens, stopwords):
 def main():
     documents = ["hello! world. how are you?", "i am nishan"]
     # print(process_documents(documents))
-    remove_stoprwords(['i', 'am'])
 
 if __name__ == "__main__":
     main()
